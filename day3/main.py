@@ -6,12 +6,12 @@ with open(file_path, "r") as file:
     big_string = file.read()
 
 # # Regular expression to match 'mul(n,m)'
-# matches = re.findall(r"mul\((\d+),(\d+)\)", big_string)
+matches = re.findall(r"mul\((\d+),(\d+)\)", big_string)
 
-# # Calculate the total sum of n * m
-# total_sum = sum(int(n) * int(m) for n, m in matches)
+# Calculate the total sum of n * m
+total_sum = sum(int(n) * int(m) for n, m in matches)
 
-# print(f"#1 TaskTotal sum: {total_sum}")
+print(f"#1 TaskTotal sum: {total_sum}")
 
 
 matches = re.findall(r"(do\(\)|don\'t\(\)|mul\(\d+,\d+\))", big_string)

@@ -18,16 +18,35 @@ def descrease_list(a,b):
         return False
     return True
 
-def good_row(my_list):
+def different_version_of_array(my_list):
+    return_list=[]
+    
+    i=0
+    while(i<len(my_list)):
+        tmp= my_list[0:i]+my_list[i+1:len(my_list)]
+        
+        return_list.append(tmp)
+        i=i+1
+    
+    return return_list
+
+def good_row(my_list,break_rule=False):
     i=1
     desc=1
     inc=1
     while(i<len(my_list)):
-        if(descrease_list(my_list[i-1],my_list[i])):
+        if(descrease_list(my_list[i-1],my_list[i])and inc==1):
             desc=desc+1
-        elif(increase_list(my_list[i-1],my_list[i])):
+        elif(increase_list(my_list[i-1],my_list[i])and desc==1):
             inc=inc+1
         else:
+            if(break_rule):
+                return False
+            second_try_list=different_version_of_array(my_list)
+            for e in second_try_list:
+                if(good_row(e,True)):
+                    return True
+            
             return False
         i=i+1
     return desc==len(my_list) or inc==len(my_list)
@@ -49,10 +68,9 @@ print(result)
 
 #Task2
 i=0
-not_dampered=True
 result=0
-while(i<len(data) and not_dampered):
-    if(good_row(data[i])):
+while(i<len(data) ):
+    if(good_row(data[i],False)):
         result=result+1
     i=i+1
 
